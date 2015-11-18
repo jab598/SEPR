@@ -10,39 +10,42 @@ public class Enemy : AI {
 	
 	public int pointsForKill;
 	int maxDistanceFromPlayer;
-	Spawner spawner;
-	PlayerStates playerStates;
 
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		rigid = this.GetComponent<Rigidbody> ();
-		wings.SetActive (false);
-		playerStates = player.GetComponent<PlayerStates> ();
-		spawner = GameObject.FindGameObjectWithTag ("Spawner").GetComponent<Spawner> ();
-		maxDistanceFromPlayer = spawner.enemySpawnRadius;
+		if (wings != null) {
+			wings.SetActive (false);
+		}
+		maxDistanceFromPlayer = Spawner.instance.enemySpawnRadius;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (health <= 0) {
-			playerStates.alterPoints(pointsForKill);
-			spawner.enemyKilled ();
+			PlayerStates.instance.alterPoints(pointsForKill);
+			GUIHandler.instance.updatePointsText (PlayerStates.instance.points.ToString(), "+"+pointsForKill.ToString());
+			Spawner.instance.enemyKilled ();
 			Destroy (this.gameObject);
 		}
-		if ((transform.position - playerStates.transform.position).magnitude > maxDistanceFromPlayer) {
-			spawner.enemyKilled();
+		if ((transform.position - player.transform.position).magnitude > maxDistanceFromPlayer) {
+			Spawner.instance.enemyKilled();
 			Destroy (this.gameObject);
 		}
 		if (state == "chasing") {
 			//dont re-order these two methods. We must start the animation before activating the wings
 			//otherwise it fails to play.
 			anim.Play("chasing");
-			wings.SetActive (true);
+			if(wings != null) {
+				wings.SetActive (true);
+			}
 		} else {
-			wings.SetActive (false);
 			anim.Play("walking");
+			if(wings != null) {
+				wings.SetActive (false);
+			}
 		}
 	}
 

@@ -4,9 +4,18 @@ using UnityEngine.UI;
 
 public class PlayerStates : MonoBehaviour {
 
-	int points;
-	public Text pointsText;
+	public static PlayerStates inst;
 
+	public static PlayerStates instance {
+		get {
+			if (inst == null) {
+				inst =  FindObjectOfType(typeof (PlayerStates)) as PlayerStates;
+			}
+			return inst;
+		}
+	}
+
+	public int points;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +29,7 @@ public class PlayerStates : MonoBehaviour {
 
 	public void alterPoints(int amount) {
 		points += amount;
-		pointsText.text = "Points: " + points.ToString ();
 	}
+
+
 }

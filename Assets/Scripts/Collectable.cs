@@ -45,9 +45,8 @@ public class Collectable : MonoBehaviour {
 	void Start () {
 		startPosition = transform.position;
 		spawner = GameObject.FindGameObjectWithTag ("Spawner").GetComponent<Spawner> ();
-		statesObj = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerStates> ();
-		pointsText = GameObject.FindGameObjectWithTag ("PointsText").transform;
 		player = GameObject.FindGameObjectWithTag ("Player");
+		statesObj = player.GetComponent<PlayerStates> ();
 	}
 	
 	// Update is called once per frame
@@ -70,9 +69,8 @@ public class Collectable : MonoBehaviour {
 
 	void OnTriggerEnter (Collider c) {
 		if(c.transform.tag == "Player") {
-			GameObject p = (GameObject)Instantiate(pointsEffect, pointsText.position, pointsText.rotation);
-			p.GetComponent<UpscrollingText>().text = "+"+pointsOnCollect.ToString ();
-			statesObj.alterPoints(pointsOnCollect);
+			PlayerStates.instance.alterPoints(pointsOnCollect);
+			GUIHandler.instance.updatePointsText(PlayerStates.instance.points.ToString(), "+"+pointsOnCollect.ToString());
 			spawner.spawnCollectable();
 			Destroy(this.gameObject);
 		}

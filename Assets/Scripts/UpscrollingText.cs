@@ -18,7 +18,7 @@ public class UpscrollingText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.transform.parent = GameObject.FindGameObjectWithTag ("Canvas").transform;
+		this.transform.SetParent (GameObject.FindGameObjectWithTag ("Canvas").transform);
 		textComponent = this.GetComponent<Text> ();
 		textComponent.text = text;
 		textComponent.color = textColor;

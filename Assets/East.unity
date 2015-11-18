@@ -2128,6 +2128,7 @@ GameObject:
   - 223: {fileID: 938704852}
   - 114: {fileID: 938704851}
   - 114: {fileID: 938704850}
+  - 114: {fileID: 938704854}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -2207,6 +2208,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &938704854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 938704849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f861d59f862fc4d67a179ca726b8d86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 969227408}
+  pointsTextUpdateEffect: {fileID: 114386, guid: c2a1bce35110e4b55a03ed54dc69db75,
+    type: 2}
 --- !u!1 &939024731
 GameObject:
   m_ObjectHideFlags: 0

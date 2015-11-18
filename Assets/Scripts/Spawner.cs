@@ -4,6 +4,17 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 
+	public static Spawner inst;
+
+	public static Spawner instance {
+		get {
+			if (inst == null) {
+				inst = FindObjectOfType (typeof(Spawner)) as Spawner;
+			}
+			return inst;
+		}
+	}
+
 	/// <summary>
 	/// Show debug info in scene view
 	/// </summary>
@@ -82,7 +93,7 @@ public class Spawner : MonoBehaviour {
 	public void spawnEnemy () {
 		//uses localEnemySpawn() to get a coord to spawn the enemy at.
 		Vector3 spawn = radiusAboutPlayer (enemySpawnRadius, 1, 50);
-		int randomIndexEnemy = Random.Range (0, enemiesToSpawn.Count - 1);
+		int randomIndexEnemy = Random.Range (0, enemiesToSpawn.Count);
 		Instantiate (enemiesToSpawn [randomIndexEnemy], spawn, Quaternion.identity);
 		Instantiate (enemySpawnEffect, spawn, Quaternion.identity);
 		currentActiveEnemies++;
