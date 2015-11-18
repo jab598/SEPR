@@ -39,12 +39,15 @@ public class Collectable : MonoBehaviour {
 
 	Vector3 startPosition;
 
+	GameObject player;
+
 	// Use this for initialization
 	void Start () {
 		startPosition = transform.position;
 		spawner = GameObject.FindGameObjectWithTag ("Spawner").GetComponent<Spawner> ();
 		statesObj = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerStates> ();
 		pointsText = GameObject.FindGameObjectWithTag ("PointsText").transform;
+		player = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
 	// Update is called once per frame
@@ -55,6 +58,13 @@ public class Collectable : MonoBehaviour {
 			wantedPosition.y += Mathf.Sin (Time.time * bobSpeed) * bobAmount;
 			transform.position = wantedPosition;
 			transform.Rotate(new Vector3(0,20*Time.deltaTime,0));
+		}
+	}
+
+	void LateUpdate () {
+		if((this.transform.position - player.transform.position).magnitude > 50) {
+			spawner.spawnCollectable();
+			Destroy (this.gameObject);
 		}
 	}
 

@@ -648,9 +648,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73a0a7889c344e5a9104c553ffa5f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSpeed: 1
-  distanceToChasePlayer: 20
-  chasingPlayerMoveSpeed: 3
+  patrolSpeed: 2
+  distanceToChasePlayer: 10
+  chasingPlayerMoveSpeed: 2
   anim: {fileID: 9542432}
   health: 30
   wings: {fileID: 178298}
@@ -766,6 +766,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: patrolSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: chasingPlayerMoveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distanceToChasePlayer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

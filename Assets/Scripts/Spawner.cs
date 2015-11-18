@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject enemySpawnEffect;
 
 	public List<GameObject> collectables = new List<GameObject>();
-	public float collSpawnDistance;
+	public float collSpawnRadius;
 	float collScanHeight;
 	int currentActiveCollectables;
 	public int maxCollectables;
@@ -58,14 +58,14 @@ public class Spawner : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//when debugging, draws lines between the active spawns and the player.
+		/*when debugging, draws lines between the active spawns and the player.
 		//only in scene view
 		if (debugMode) {
 			setLocalEnemySpawns();
 			foreach (Transform t in closeSpawnPoints) {
 				Debug.DrawLine (t.position, player.transform.position);
 			}
-		}
+		}*/
 
 		//ensures there is always maxEnemies in the scene.
 		while (currentActiveEnemies < maxEnemies) {
@@ -80,19 +80,8 @@ public class Spawner : MonoBehaviour {
 	/// Spawns a random enemy close to the player.
 	/// </summary>
 	public void spawnEnemy () {
-		//updates spawns, 
-		//setLocalEnemySpawns ();
-		//when we have spawns, randomly select a spawn and an enemy, then
-		//instantiate the spawn effect prefab and the enemy prefab. add an enemy to
-		/*the count
-		if (closeSpawnPoints.Count != 0) {
-			int randomIndexPos = Random.Range (0, closeSpawnPoints.Count - 1);
-			int randomIndexEnemy = Random.Range (0, enemiesToSpawn.Count - 1);
-			Instantiate (enemiesToSpawn [randomIndexEnemy], closeSpawnPoints [randomIndexPos].position, closeSpawnPoints [randomIndexPos].rotation);
-			Instantiate (enemySpawnEffect, closeSpawnPoints[randomIndexPos].position, closeSpawnPoints[randomIndexPos].rotation);
-			currentActiveEnemies++;
-		}*/
-		Vector3 spawn = localEnemySpawn ();
+		//uses localEnemySpawn() to get a coord to spawn the enemy at.
+		Vector3 spawn = radiusAboutPlayer (enemySpawnRadius, 1, 50);
 		int randomIndexEnemy = Random.Range (0, enemiesToSpawn.Count - 1);
 		Instantiate (enemiesToSpawn [randomIndexEnemy], spawn, Quaternion.identity);
 		Instantiate (enemySpawnEffect, spawn, Quaternion.identity);
@@ -100,53 +89,29 @@ public class Spawner : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Sets closeSpawnPoints to the ones nearest the player.
+	/// Point near the ground in a radius about the player the about player.
 	/// </summary>
-	void setLocalEnemySpawns () {
-		closeSpawnPoints = new List<Transform>(possibleEnemySpawns);
-		//a "for" loop that handles items being deleted half way through.
-		//When an item is deleted, the index isnt incremented.
-		int i = 0;
-		while (i < closeSpawnPoints.Count) {
-			if((closeSpawnPoints[i].position - player.transform.position).magnitude > enemySpawnRadius) {
-				closeSpawnPoints.RemoveAt (i);
-			} else {
-				i++;
-			}
-		}
-	}
-
-	Vector3 localEnemySpawn () {
-		Vector3 tempSpawn = new Vector3(Random.Range (player.transform.position.x-collSpawnDistance,player.transform.position.x+collSpawnDistance),
-		                                collScanHeight,
-		                                Random.Range (player.transform.position.z-collSpawnDistance,player.transform.position.z+collSpawnDistance)
+	/// <returns>The about player.</returns>
+	/// <param name="distance">Max distance from player.</param>
+	/// <param name="height">Height above ground to place point.</param>
+	/// <param name="scanHeight">Height to start scanning down from for raytracing.</param>
+	Vector3 radiusAboutPlayer (float distance, float height, float scanHeight) {
+		Vector3 tempSpawn = new Vector3(Random.Range (player.transform.position.x-distance,player.transform.position.x+distance),
+		                                scanHeight,
+		                                Random.Range (player.transform.position.z-distance,player.transform.position.z+distance)
 		                                );
 		RaycastHit hit;
 		if (Physics.Raycast (tempSpawn, Vector3.down, out hit)) {
 			tempSpawn = hit.point;
-			tempSpawn.y += collectableSpawnHeight;
+			tempSpawn.y += height;
 			return tempSpawn;
 		}
 		return player.transform.position;
 	}
 
 	public void spawnCollectable () {
-		Instantiate(collectables[Random.Range (0,collectables.Count-1)], localCollectableSpawn(), Quaternion.identity);
+		Instantiate(collectables[Random.Range (0,collectables.Count-1)], radiusAboutPlayer(collSpawnRadius,0.3f,50), Quaternion.identity);
 		currentActiveCollectables++;
-	}
-
-	Vector3 localCollectableSpawn () {
-		Vector3 tempSpawn = new Vector3(Random.Range (player.transform.position.x-collSpawnDistance,player.transform.position.x+collSpawnDistance),
-		                                collScanHeight,
-		                                Random.Range (player.transform.position.z-collSpawnDistance,player.transform.position.z+collSpawnDistance)
-		                                );
-		RaycastHit hit;
-		if (Physics.Raycast (tempSpawn, Vector3.down, out hit)) {
-			tempSpawn = hit.point;
-			tempSpawn.y += collectableSpawnHeight;
-			return tempSpawn;
-		}
-		return player.transform.position;
 	}
 
 	/// <summary>
