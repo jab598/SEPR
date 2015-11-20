@@ -21,6 +21,11 @@ public class GUIHandler : MonoBehaviour {
 	void OnApplicationQuit() {
 		inst = null;
 	}
+
+	void Start () {
+		updateMissions ();
+		InvokeRepeating ("dd", 2,1);
+	}
 	
 	public Text pointsText;
 	public GameObject pointsTextUpdateEffect;
@@ -32,5 +37,15 @@ public class GUIHandler : MonoBehaviour {
 			GameObject p = (GameObject)Instantiate (pointsTextUpdateEffect, pointsText.transform.position, Quaternion.identity);
 			p.GetComponent<UpscrollingText>().text = updateText;
 		}
+	}
+
+	public void updateMissions () {
+		for(int i = 0; i < MissionManager.instance.missionTexts.Count; i++) {
+			MissionManager.instance.texts[i].text = MissionManager.instance.missionTexts[i] +": "+MissionManager.instance.missionProgress[i].ToString()+"/"+MissionManager.instance.missionValues[i].ToString();
+		}
+	}
+
+	void dd() {
+		MissionManager.instance.addProgress (2, 1);
 	}
 }

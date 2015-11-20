@@ -39,7 +39,11 @@ public class AI : MonoBehaviour {
 	/// Current health of the entity
 	/// </summary>
 	public int health;
-	
+
+	/// <summary>
+	/// Distances to player.
+	/// </summary>
+	/// <returns>The to player.</returns>
 	float distanceToPlayer () {
 		return Mathf.Abs((player.transform.position - this.transform.position).magnitude);
 	}

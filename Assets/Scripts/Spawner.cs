@@ -102,7 +102,7 @@ public class Spawner : MonoBehaviour {
 	/// <summary>
 	/// Point near the ground in a radius about the player the about player.
 	/// </summary>
-	/// <returns>The about player.</returns>
+	/// <returns>Random point thats near the player.</returns>
 	/// <param name="distance">Max distance from player.</param>
 	/// <param name="height">Height above ground to place point.</param>
 	/// <param name="scanHeight">Height to start scanning down from for raytracing.</param>
