@@ -17,6 +17,13 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
+	
+	public Text pointsText;
+	public GameObject pointsTextUpdateEffect;
+	public Text energy;
+	public Image energyBar;
+	public int maxEnergyWidth;
+	int i;
 	// Ensure that the instance is destroyed when the game is stopped in the editor.
 	void OnApplicationQuit() {
 		inst = null;
@@ -24,15 +31,12 @@ public class GUIHandler : MonoBehaviour {
 
 	void Start () {
 		updateMissions ();
-		InvokeRepeating ("dd", 2,1);
+		InvokeRepeating ("test", 0, 1);
 	}
 
 	void Update () {
 
 	}
-	
-	public Text pointsText;
-	public GameObject pointsTextUpdateEffect;
 	
 	public void updatePointsText (string newText, string updateText) {
 		Debug.Log (updateText);
@@ -49,7 +53,16 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
-	void dd() {
-		MissionManager.instance.addProgress (2, 1);
+	public void updateEnergy (int value) {
+		int clampVal = Mathf.Clamp (value, 0, 100);
+		energy.text = "Energy: " + clampVal.ToString() + "%";
+		Vector3 newSize = energyBar.rectTransform.sizeDelta;
+		newSize.x = clampVal*maxEnergyWidth/100;
+		energyBar.rectTransform.sizeDelta = newSize;
+	}
+
+	void test () {
+		updateEnergy (i);
+		i += 5;
 	}
 }

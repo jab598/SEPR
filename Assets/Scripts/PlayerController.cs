@@ -3,8 +3,16 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	public enum State
+	{
+		Flying, Walking, Swimming
+	}
+
+	public State state;
+
 	public float movementSpeed;
 	public float flightSpeed;
+	public float swimSpeed;
 
 	public float lookSensitivity;
 	public bool lockCursor;
@@ -13,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 	public float ascentSpeed;
 	public Animator duckAnim;
 	public GameObject duckWings;
+	public float flightHeight;
 
 	float currentHeight;
 
@@ -30,15 +39,18 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per physics update
 	void FixedUpdate () {
-		Vector3 wantedVel = new Vector3 (0, 0, 0);
+		Vector3 pos = transform.position;
 		if (Input.GetAxis ("Vertical") != 0 || Input.GetAxis ("Horizontal") != 0) {
 
-			if (distanceToGround () <= 0.25f) {
-				wantedVel += transform.forward * Input.GetAxis ("Vertical") * movementSpeed;
-				wantedVel += transform.right * Input.GetAxis ("Horizontal") * movementSpeed;
+			if (state == State.Walking) {
+				pos += transform.forward * Input.GetAxis ("Vertical") * movementSpeed * Time.deltaTime;
+				pos += transform.right * Input.GetAxis ("Horizontal") * movementSpeed * Time.deltaTime;
+			} else if(state == State.Flying) {
+				pos += transform.forward * Input.GetAxis ("Vertical") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed) * Time.deltaTime;
+				pos += transform.right * Input.GetAxis ("Horizontal") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed) * Time.deltaTime;
 			} else {
-				wantedVel += transform.forward * Input.GetAxis ("Vertical") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed);
-				wantedVel += transform.right * Input.GetAxis ("Horizontal") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed);
+				pos += transform.forward * Input.GetAxis ("Vertical") * swimSpeed * Time.deltaTime;
+				pos += transform.right * Input.GetAxis ("Horizontal") * swimSpeed * Time.deltaTime;
 			}
 		}
 		if (Input.GetAxis ("Mouse X") != 0) {
@@ -46,30 +58,32 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButton ("Jump") && transform.position.y <= maximumHeight) {
-			wantedVel.y +=  ascentSpeed;
-			flying = true;
+			pos.y +=  ascentSpeed * Time.deltaTime;
+			state = State.Flying;
+		}
+
+		if (distanceToGround () <= flightHeight && state != State.Swimming) {
+			state = State.Walking;
 		}
 
 		if (Input.GetButton ("Decend") && distanceToGround() >= 0) {
-			wantedVel.y -= ascentSpeed;
+			pos.y -= ascentSpeed * Time.deltaTime;
 		}
 
-		if (flying) {
+		if (state == State.Flying) {
+			r.velocity = new Vector3(0,0,0);
 			r.useGravity = false;
 			duckWings.SetActive(true);;
 			duckAnim.Play("Flying");
-			if(distanceToGround() <= 0.25f) {
-				flying = false;
+			if(distanceToGround() <= flightHeight) {
+				state = State.Walking;
 			}
 		} else {
 			duckWings.SetActive(false);
 			r.useGravity = true;
 			duckAnim.Play("Walking");
-			if(distanceToGround() >= 0.25f) {
-				wantedVel += Physics.gravity;
-			}
 		}
-		r.velocity = wantedVel;
+		r.MovePosition (pos);
 	}
 
 	public float distanceToGround () {		
