@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 
 	public Rigidbody r;
 
+	bool flying;
+
 	// Use this for initialization
 	void Start () {
 		r = this.GetComponent<Rigidbody> ();
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
+	// Update is called once per physics update
 	void FixedUpdate () {
 		Vector3 wantedVel = new Vector3 (0, 0, 0);
 		if (Input.GetAxis ("Vertical") != 0 || Input.GetAxis ("Horizontal") != 0) {
@@ -45,20 +47,27 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetButton ("Jump") && transform.position.y <= maximumHeight) {
 			wantedVel.y +=  ascentSpeed;
+			flying = true;
 		}
 
 		if (Input.GetButton ("Decend") && distanceToGround() >= 0) {
 			wantedVel.y -= ascentSpeed;
 		}
 
-		if (distanceToGround () >= 0.25f) {
+		if (flying) {
 			r.useGravity = false;
 			duckWings.SetActive(true);;
 			duckAnim.Play("Flying");
+			if(distanceToGround() <= 0.25f) {
+				flying = false;
+			}
 		} else {
 			duckWings.SetActive(false);
 			r.useGravity = true;
 			duckAnim.Play("Walking");
+			if(distanceToGround() >= 0.25f) {
+				wantedVel += Physics.gravity;
+			}
 		}
 		r.velocity = wantedVel;
 	}

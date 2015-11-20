@@ -867,7 +867,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &404415955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,8 +1266,8 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 5e9c83d41cf334234976d7417b2a4c7a, type: 3}
   m_PrefabInternal: {fileID: 1906309095}
---- !u!65 &585200768
-BoxCollider:
+--- !u!136 &585200768
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1275,9 +1275,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.70000005, y: 3.36370468, z: 5.57000113}
-  m_Center: {x: 0, y: -.308433771, z: .0238037109}
+  m_Radius: 1.54413986
+  m_Height: 4.63528919
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &585200769
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1345,6 +1346,73 @@ Animator:
   m_PrefabParentObject: {fileID: 9500000, guid: 5e9c83d41cf334234976d7417b2a4c7a,
     type: 3}
   m_PrefabInternal: {fileID: 1906309095}
+--- !u!1 &588435851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 588435852}
+  - 222: {fileID: 588435854}
+  - 114: {fileID: 588435853}
+  m_Layer: 5
+  m_Name: Panel (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &588435852
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 588435851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 938704853}
+  m_RootOrder: 4
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 350}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &588435853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 588435851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 32450a43e92e44ea1a4a3e56a6319272, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &588435854
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 588435851}
 --- !u!1 &610323141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1838,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hunger: 0'
+  m_Text: 'Energy: 0%'
 --- !u!222 &790431812
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2596,6 +2664,7 @@ RectTransform:
   - {fileID: 1740591232}
   - {fileID: 1394746528}
   - {fileID: 18088542}
+  - {fileID: 588435852}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 0}
@@ -3969,10 +4038,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionTexts:
   - Collect 10 breads
-  - Kill 10 geese
+  - Visit every place
   - Kill 10 rabbits
-  missionValues: 0a0000000a0000000a000000
-  missionProgress: 010000000300000002000000
+  missionValues: 0a000000080000000a000000
+  missionProgress: 010000000000000002000000
   texts:
   - {fileID: 849757862}
   - {fileID: 333536141}
@@ -4944,7 +5013,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 5e9c83d41cf334234976d7417b2a4c7a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9000001
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 5e9c83d41cf334234976d7417b2a4c7a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4952,7 +5021,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 5e9c83d41cf334234976d7417b2a4c7a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.1000004
+      value: 27.5
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 5e9c83d41cf334234976d7417b2a4c7a, type: 3}
       propertyPath: m_LocalRotation.x
