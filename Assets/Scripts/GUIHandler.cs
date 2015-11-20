@@ -16,7 +16,9 @@ public class GUIHandler : MonoBehaviour {
 			return inst;
 		}
 	}
-	
+
+	public GameObject map;
+
 	// Ensure that the instance is destroyed when the game is stopped in the editor.
 	void OnApplicationQuit() {
 		inst = null;
@@ -25,6 +27,12 @@ public class GUIHandler : MonoBehaviour {
 	void Start () {
 		updateMissions ();
 		InvokeRepeating ("dd", 2,1);
+	}
+
+	void Update () {
+		if (Input.GetButton ("Jump")) {
+			map.SetActive(true);
+		}
 	}
 	
 	public Text pointsText;

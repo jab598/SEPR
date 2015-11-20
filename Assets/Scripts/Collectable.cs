@@ -14,11 +14,6 @@ public class Collectable : MonoBehaviour {
 	public GameObject pointsEffect;
 
 	/// <summary>
-	/// Reference to the player states script, for updating points
-	/// </summary>
-	public PlayerStates statesObj;
-
-	/// <summary>
 	/// Does the object bob?
 	/// </summary>
 	public bool bob;
@@ -33,8 +28,6 @@ public class Collectable : MonoBehaviour {
 	/// </summary>
 	public float bobSpeed;
 
-	Spawner spawner;
-
 	Transform pointsText;
 
 	Vector3 startPosition;
@@ -44,9 +37,7 @@ public class Collectable : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		startPosition = transform.position;
-		spawner = GameObject.FindGameObjectWithTag ("Spawner").GetComponent<Spawner> ();
 		player = GameObject.FindGameObjectWithTag ("Player");
-		statesObj = player.GetComponent<PlayerStates> ();
 	}
 	
 	// Update is called once per frame
@@ -62,7 +53,7 @@ public class Collectable : MonoBehaviour {
 
 	void LateUpdate () {
 		if((this.transform.position - player.transform.position).magnitude > 50) {
-			spawner.spawnCollectable();
+			Spawner.instance.spawnCollectable();
 			Destroy (this.gameObject);
 		}
 	}
@@ -71,7 +62,7 @@ public class Collectable : MonoBehaviour {
 		if(c.transform.tag == "Player") {
 			PlayerStates.instance.alterPoints(pointsOnCollect);
 			GUIHandler.instance.updatePointsText(PlayerStates.instance.points.ToString(), "+"+pointsOnCollect.ToString());
-			spawner.spawnCollectable();
+			Spawner.instance.spawnCollectable();
 			Destroy(this.gameObject);
 		}
 	}
