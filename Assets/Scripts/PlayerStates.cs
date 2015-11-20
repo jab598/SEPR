@@ -16,6 +16,11 @@ public class PlayerStates : MonoBehaviour {
 	}
 
 	public int points;
+	public int resources;
+	int geeseKilled = 0;
+	int rabbitsKilled = 0;
+	int breadCollected = 0;
+
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +34,11 @@ public class PlayerStates : MonoBehaviour {
 
 	public void alterPoints(int amount) {
 		points += amount;
+	}
+
+	public void killedGoose () {
+		geeseKilled += 1;
+		//MissionManager.instance.addProgress (0, 1);
 	}
 
 

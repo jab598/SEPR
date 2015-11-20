@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		r = this.GetComponent<Rigidbody> ();
 		if (lockCursor) {
-			Screen.lockCursor = true;
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 		}
 	}
 	

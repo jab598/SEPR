@@ -35,9 +35,6 @@ public class Spawner : MonoBehaviour {
 	/// </summary>
 	public List<Transform> possibleEnemySpawns = new List<Transform> ();
 
-	//spawn points closest to the player, calculated when an enemy is spawned
-	List<Transform> closeSpawnPoints = new List<Transform> ();
-
 	/// <summary>
 	/// Possible enimies that can be spawned
 	/// </summary>
@@ -54,7 +51,6 @@ public class Spawner : MonoBehaviour {
 	int currentActiveCollectables;
 	public int maxCollectables;
 	public float collectableSpawnHeight;
-	List<Vector3> localPickupSpawns = new List<Vector3>();
 
 	//current amount of enemies on the scene
 	int currentActiveEnemies = 0;

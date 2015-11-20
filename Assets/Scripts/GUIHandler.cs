@@ -20,18 +20,22 @@ public class GUIHandler : MonoBehaviour {
 	
 	public Text pointsText;
 	public GameObject pointsTextUpdateEffect;
-	public Text energy;
+	public Text energyText;
 	public Image energyBar;
 	public int maxEnergyWidth;
-	int i;
+	public Text missionTextPrefab;
+	public GameObject missionPanel;
+	
+	private int missionTextsPositionOffset;
+
 	// Ensure that the instance is destroyed when the game is stopped in the editor.
 	void OnApplicationQuit() {
 		inst = null;
 	}
 
 	void Start () {
+		buildMissionTexts (MissionManager.instance.missions.Count);
 		updateMissions ();
-		InvokeRepeating ("test", 0, 1);
 	}
 
 	void Update () {
@@ -47,22 +51,28 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
-	public void updateMissions () {
-		for(int i = 0; i < MissionManager.instance.missionTexts.Count; i++) {
-			MissionManager.instance.texts[i].text = MissionManager.instance.missionTexts[i] +": "+MissionManager.instance.missionProgress[i].ToString()+"/"+MissionManager.instance.missionValues[i].ToString();
+	void buildMissionTexts (int amount) {
+		missionTextsPositionOffset = 0;
+		foreach(Mission m in MissionManager.instance.missionsDict.Values) {
+			Text t = (Text)Instantiate (missionTextPrefab,Vector2.zero, Quaternion.identity);
+			t.gameObject.GetComponent<Text>().text = m.missionText + ": " + m.progress.ToString()+"/"+m.completeProgress.ToString();
+			t.gameObject.transform.SetParent(missionPanel.transform);
+			t.rectTransform.localPosition = new Vector2(-110, 100-20*(1+missionTextsPositionOffset));
+			missionTextsPositionOffset++;
 		}
 	}
 
-	public void updateEnergy (int value) {
+	public void updateMissions () {
+		for(int i = 0; i < MissionManager.instance.missions.Count; i++) {
+
+		}
+	}
+
+	public void updateEnergyBar (int value) {
 		int clampVal = Mathf.Clamp (value, 0, 100);
-		energy.text = "Energy: " + clampVal.ToString() + "%";
+		energyText.text = "Energy: " + clampVal.ToString() + "%";
 		Vector3 newSize = energyBar.rectTransform.sizeDelta;
 		newSize.x = clampVal*maxEnergyWidth/100;
 		energyBar.rectTransform.sizeDelta = newSize;
-	}
-
-	void test () {
-		updateEnergy (i);
-		i += 5;
 	}
 }

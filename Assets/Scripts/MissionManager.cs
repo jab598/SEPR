@@ -16,14 +16,14 @@ public class MissionManager : MonoBehaviour {
 		}
 	}
 
-	public List<string> missionTexts = new List<string>();
-	public List<int> missionValues = new List<int>();
-	public List<int> missionProgress = new List<int> ();
-	public List<Text> texts = new List<Text>();
+	public List<Mission> missions = new List<Mission>();
+	public Dictionary<string, Mission> missionsDict = new Dictionary<string,Mission>();
 
 	// Use this for initialization
-	void Start () {
-
+	void Awake () {
+		foreach (Mission mission in missions) {
+			missionsDict[mission.tag] = mission;
+		}
 	}
 	
 	// Update is called once per frame
@@ -31,19 +31,16 @@ public class MissionManager : MonoBehaviour {
 	
 	}
 
-	public void updateMission(int index, string text, int value, int progress) {
-		missionTexts [index] = text;
-		missionValues [index] = value;
-		missionProgress [index] = progress;
-		GUIHandler.instance.updateMissions ();
+	public void addProgress(string tag, int amount, bool updateGUI = true) {
+		missionsDict [tag].addProgress (amount);
+		if (updateGUI) {
+			GUIHandler.instance.updateMissions();
+		}
 	}
 
-	public void addProgress(int index, int progress, bool autoUpdateGUI = true) {
-		missionProgress [index] += progress;
-		if (missionProgress [index] > missionValues [index]) {
-			missionProgress[index] = missionValues[index];
-		}
-		if (autoUpdateGUI) {
+	public void replaceMission(string tag, Mission replacement, bool updateGUI = true) {
+		missionsDict [tag] = replacement;
+		if (updateGUI) {
 			GUIHandler.instance.updateMissions();
 		}
 	}

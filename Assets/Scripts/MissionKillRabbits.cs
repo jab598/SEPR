@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SustainHunger : Mission {
+public class MissionKillRabbits : Mission {
 
 	// Use this for initialization
 	void Start () {
