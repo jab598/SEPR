@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GUIHandler : MonoBehaviour {
 
@@ -25,6 +26,8 @@ public class GUIHandler : MonoBehaviour {
 	public int maxEnergyWidth;
 	public Text missionTextPrefab;
 	public GameObject missionPanel;
+
+	List<Text> missionTexts = new List<Text> ();
 	
 	private int missionTextsPositionOffset;
 
@@ -42,12 +45,16 @@ public class GUIHandler : MonoBehaviour {
 
 	}
 	
-	public void updatePointsText (string newText, string updateText) {
+	public void updatePointsText (string newText, string updateText, bool mission = false) {
 		Debug.Log (updateText);
 		pointsText.text = "Points: " + newText;
-		if (pointsTextUpdateEffect != null) {
+		if (pointsTextUpdateEffect != null && !mission) {
 			GameObject p = (GameObject)Instantiate (pointsTextUpdateEffect, pointsText.transform.position, Quaternion.identity);
-			p.GetComponent<UpscrollingText>().text = updateText;
+			p.GetComponent<UpscrollingText> ().text = updateText;
+		} else if (pointsTextUpdateEffect != null && mission) {
+			GameObject p = (GameObject)Instantiate (pointsTextUpdateEffect, pointsText.transform.position, Quaternion.identity);
+			p.GetComponent<UpscrollingText> ().text = updateText;
+			p.GetComponent<UpscrollingText>().movementVector = new Vector3(p.GetComponent<UpscrollingText>().movementVector.y,0,0);
 		}
 	}
 
@@ -58,13 +65,16 @@ public class GUIHandler : MonoBehaviour {
 			t.gameObject.GetComponent<Text>().text = m.missionText + ": " + m.progress.ToString()+"/"+m.completeProgress.ToString();
 			t.gameObject.transform.SetParent(missionPanel.transform);
 			t.rectTransform.localPosition = new Vector2(-110, 100-20*(1+missionTextsPositionOffset));
+			missionTexts.Add(t);
 			missionTextsPositionOffset++;
 		}
 	}
 
 	public void updateMissions () {
-		for(int i = 0; i < MissionManager.instance.missions.Count; i++) {
-
+		missionTextsPositionOffset = 0;
+		foreach (Mission m in MissionManager.instance.missionsDict.Values) {
+			missionTexts[missionTextsPositionOffset].text = m.missionText + ": " + m.progress.ToString() + "/" + m.completeProgress.ToString();
+			missionTextsPositionOffset++;
 		}
 	}
 
@@ -75,4 +85,5 @@ public class GUIHandler : MonoBehaviour {
 		newSize.x = clampVal*maxEnergyWidth/100;
 		energyBar.rectTransform.sizeDelta = newSize;
 	}
+	
 }

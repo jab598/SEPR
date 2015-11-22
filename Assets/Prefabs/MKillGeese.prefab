@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 438568}
   - 114: {fileID: 11456718}
   m_Layer: 0
-  m_Name: MSustainHunger
+  m_Name: MKillGeese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,8 +40,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   complete: 0
-  missionName: Sustain Hunger
-  missionText: Hunger
+  missionName: Kill Geese
+  missionText: Kill Geese
+  tag: killgeese
   progress: 0
   completeProgress: 10
   pointsForComplete: 100
@@ -51,7 +52,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: missionName
+      value: Kill Geese
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionText
+      value: Kill Geese
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: tag
+      value: killgeese
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: progress
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 145264}

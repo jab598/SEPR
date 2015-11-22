@@ -17,9 +17,11 @@ public class Mission : MonoBehaviour {
 
 	public int pointsForComplete;
 
-
-	public void addProgress(int amount) {
-		progress = Mathf.Clamp (progress + amount, 0, completeProgress);
+	public void checkProgress () {
+		Debug.Log ("Checked");
+		if(progress >= completeProgress) {
+			complete = true;
+		}
 	}
 
 }

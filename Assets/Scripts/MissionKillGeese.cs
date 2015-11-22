@@ -3,8 +3,6 @@ using System.Collections;
 
 public class MissionKillGeese : Mission {
 
-	
-
 	void FixedUpdate () {
 
 	}

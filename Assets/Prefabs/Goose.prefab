@@ -653,8 +653,9 @@ MonoBehaviour:
   chasingPlayerMoveSpeed: 2
   anim: {fileID: 9542432}
   health: 30
-  wings: {fileID: 178298}
   pointsForKill: 10
+  missionProgressTag: killgeese
+  wings: {fileID: 178298}
 --- !u!137 &13709056
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -778,6 +779,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: distanceToChasePlayer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionProgressTag
+      value: killgeese
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

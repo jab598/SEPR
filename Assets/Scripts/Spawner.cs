@@ -109,9 +109,13 @@ public class Spawner : MonoBehaviour {
 		                                );
 		RaycastHit hit;
 		if (Physics.Raycast (tempSpawn, Vector3.down, out hit)) {
-			tempSpawn = hit.point;
-			tempSpawn.y += height;
-			return tempSpawn;
+			if(hit.transform.tag != "Water") {
+				tempSpawn = hit.point;
+				tempSpawn.y += height;
+				return tempSpawn;
+			} else {
+				return radiusAboutPlayer(distance,height,scanHeight);
+			}
 		}
 		return player.transform.position;
 	}

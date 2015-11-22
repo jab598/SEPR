@@ -3,13 +3,6 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public enum State
-	{
-		Flying, Walking, Swimming
-	}
-
-	public State state;
-
 	public float movementSpeed;
 	public float flightSpeed;
 	public float swimSpeed;
@@ -27,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 
 	public Rigidbody r;
 
-	bool flying;
+	PlayerStates p;
 
 	// Use this for initialization
 	void Start () {
@@ -36,17 +29,17 @@ public class PlayerController : MonoBehaviour {
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
+		p = PlayerStates.instance;;
 	}
 	
 	// Update is called once per physics update
 	void FixedUpdate () {
 		Vector3 pos = transform.position;
 		if (Input.GetAxis ("Vertical") != 0 || Input.GetAxis ("Horizontal") != 0) {
-
-			if (state == State.Walking) {
+			if (p.currentState == PlayerStates.State.Walking) {
 				pos += transform.forward * Input.GetAxis ("Vertical") * movementSpeed * Time.deltaTime;
 				pos += transform.right * Input.GetAxis ("Horizontal") * movementSpeed * Time.deltaTime;
-			} else if(state == State.Flying) {
+			} else if(p.currentState == PlayerStates.State.Flying) {
 				pos += transform.forward * Input.GetAxis ("Vertical") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed) * Time.deltaTime;
 				pos += transform.right * Input.GetAxis ("Horizontal") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed) * Time.deltaTime;
 			} else {
@@ -58,32 +51,32 @@ public class PlayerController : MonoBehaviour {
 			transform.RotateAround(transform.position, Vector3.up ,Input.GetAxis("Mouse X") * lookSensitivity);
 		}
 
-		if (Input.GetButton ("Jump") && transform.position.y <= maximumHeight) {
+		if (Input.GetButton ("Jump") && transform.position.y <= maximumHeight && PlayerStates.instance.energy >= 0) {
+			startFlying();
 			pos.y +=  ascentSpeed * Time.deltaTime;
-			state = State.Flying;
+			p.currentState = PlayerStates.State.Flying;
 		}
 
-		if (distanceToGround () <= flightHeight && state != State.Swimming) {
-			state = State.Walking;
-		}
-
-		if (Input.GetButton ("Decend") && distanceToGround() >= 0) {
+		if (Input.GetButton ("Decend") && PlayerStates.instance.currentState == PlayerStates.State.Flying) {
 			pos.y -= ascentSpeed * Time.deltaTime;
 		}
 
-		if (state == State.Flying) {
-			r.velocity = new Vector3(0,0,0);
-			r.useGravity = false;
-			duckWings.SetActive(true);;
-			duckAnim.Play("Flying");
-			if(distanceToGround() <= flightHeight) {
-				state = State.Walking;
-			}
-		} else {
-			duckWings.SetActive(false);
-			r.useGravity = true;
-			duckAnim.Play("Walking");
+		if (distanceToGround () <= flightHeight && PlayerStates.instance.currentState == PlayerStates.State.Flying) {
+			startWalking();
 		}
+
+		if (PlayerStates.instance.currentState == PlayerStates.State.Flying) {
+			flying ();
+		}
+
+		if (PlayerStates.instance.currentState == PlayerStates.State.Walking) {
+			walking ();
+		}
+
+		if (PlayerStates.instance.currentState == PlayerStates.State.Swimming) {
+			swimming ();
+		}
+		
 		r.MovePosition (pos);
 	}
 
@@ -95,4 +88,46 @@ public class PlayerController : MonoBehaviour {
 			return -1;
 		}
 	}
+
+	public void startFlying () {
+		r.velocity = new Vector3(0,0,0);
+		r.useGravity = false;
+		duckWings.SetActive(true);;
+		duckAnim.Play("Flying");
+		PlayerStates.instance.currentState = PlayerStates.State.Flying;
+	}
+
+	public void flying () {
+		if(distanceToGround() <= flightHeight) {
+			p.currentState = PlayerStates.State.Walking;
+		}
+	}
+
+	public void startWalking () {
+		duckWings.SetActive(false);
+		r.useGravity = true;
+		duckAnim.Play("Walking");
+		PlayerStates.instance.currentState = PlayerStates.State.Walking;
+	}
+
+	public void walking () {
+		if (transform.position.y <= 0) {
+			startSwimming();
+		}
+
+	}
+
+	public void startSwimming () {
+		PlayerStates.instance.currentState = PlayerStates.State.Swimming;
+		duckWings.SetActive (false);
+		duckAnim.Play ("Walking");
+	}
+
+	public void swimming () {
+		if (transform.position.y >= 0 && transform.position.y <= flightHeight) {
+			startWalking();
+		}
+	}
+
+
 }

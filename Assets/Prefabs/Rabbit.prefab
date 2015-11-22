@@ -114,9 +114,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 447954}
   - 95: {fileID: 9533070}
-  - 114: {fileID: 11456028}
   - 54: {fileID: 5444694}
   - 65: {fileID: 6527424}
+  - 114: {fileID: 11408796}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Enemy
@@ -328,7 +328,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11456028
+--- !u!114 &11408796
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -336,16 +336,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 152848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73a0a7889c344e5a9104c553ffa5f6a, type: 3}
+  m_Script: {fileID: 11500000, guid: dfab9ae74ce7347408039d5240a03a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   patrolSpeed: 1
-  distanceToChasePlayer: 10
-  chasingPlayerMoveSpeed: 3
+  distanceToChasePlayer: 20
+  chasingPlayerMoveSpeed: 2
   anim: {fileID: 9533070}
-  health: 10
-  wings: {fileID: 0}
+  health: 20
   pointsForKill: 5
+  missionProgressTag: killrabbits
 --- !u!137 &13795580
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -395,7 +395,35 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: patrolSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distanceToChasePlayer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: chasingPlayerMoveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 9533070}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: pointsForKill
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionProgressTag
+      value: killrabbits
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152848}

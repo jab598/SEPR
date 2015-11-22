@@ -32,7 +32,8 @@ public class MissionManager : MonoBehaviour {
 	}
 
 	public void addProgress(string tag, int amount, bool updateGUI = true) {
-		missionsDict [tag].addProgress (amount);
+		missionsDict [tag].progress = Mathf.Clamp (missionsDict[tag].progress + amount, 0, missionsDict [tag].completeProgress);
+		missionsDict [tag].checkProgress ();
 		if (updateGUI) {
 			GUIHandler.instance.updateMissions();
 		}

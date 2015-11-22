@@ -32,8 +32,12 @@ public class AI : MonoBehaviour {
 	//reference to the attached rigidbody. Assigned in the sub class constructor.
 	protected Rigidbody rigid;
 
+	public enum State {
+		Walking, Chasing
+	}
+
 	//state variable to be read by sub class.
-	protected string state = "";
+	protected State state = State.Walking;
 
 	/// <summary>
 	/// Current health of the entity
@@ -62,13 +66,13 @@ public class AI : MonoBehaviour {
 					transform.Rotate (new Vector3 (0, 180, 0));
 				}
 			}
-			state = "walking";
+			state = State.Walking;
 		} else {
 			Vector3 lpos = player.transform.position;
 			lpos.y = transform.position.y;
 			transform.LookAt(lpos);
 			rigid.MovePosition(transform.position + (transform.forward * Time.deltaTime * chasingPlayerMoveSpeed));
-			state = "chasing";
+			state = State.Chasing;
 		}
 	}
 }

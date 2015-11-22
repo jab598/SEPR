@@ -5,9 +5,10 @@ using UnityEngine.UI;
 public class UpscrollingText : MonoBehaviour {
 
 	public string text;
-	public float speed;
 	public float lifetime;
 	public Color textColor = new Color (255, 255, 255, 255);
+
+	public Vector3 movementVector = new Vector3 (0, 1, 0);
 
 	Text textComponent;
 	Color faded;
@@ -29,7 +30,7 @@ public class UpscrollingText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (new Vector3 (0, speed*Time.deltaTime, 0));
+		transform.Translate (movementVector * Time.deltaTime);
 		textComponent.color = Color.Lerp (textComponent.color, faded, 1 / (textComponent.color.a - faded.a) * Time.deltaTime);
 	}
 
