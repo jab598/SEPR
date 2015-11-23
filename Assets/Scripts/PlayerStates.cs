@@ -17,8 +17,10 @@ public class PlayerStates : MonoBehaviour {
 
 
 	public enum State {
-		Flying, Walking, Swimming
+		Flying, Walking, Swimming, Falling
 	}
+
+	public int health = 100;
 
 	/// <summary>
 	/// Current state of the player.
@@ -71,6 +73,7 @@ public class PlayerStates : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		gradualEnergyChange ();
+		GUIHandler.instance.updateHealthBar(health);
 	}
 
 	/// <summary>
@@ -97,6 +100,17 @@ public class PlayerStates : MonoBehaviour {
 	public void alterEnergy (int amount) {
 		//energy must be between 0 and 100.
 		energy = Mathf.Clamp (energy + amount, 0, 100);
+	}
+
+
+	public void alterHealth(int amount) {
+		//health must be between 0 and 100
+		health = Mathf.Clamp (health + amount, 0, 100);
+		GUIHandler.instance.updateHealthBar(health);
+	}
+
+	public void alterResources(int amount) {
+		resources += amount;
 	}
 
 	/// <summary>

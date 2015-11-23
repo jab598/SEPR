@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
-		p = PlayerStates.instance;;
+		p = PlayerStates.instance;
 	}
 	
 	// Update is called once per physics update
@@ -51,29 +51,32 @@ public class PlayerController : MonoBehaviour {
 			transform.RotateAround(transform.position, Vector3.up ,Input.GetAxis("Mouse X") * lookSensitivity);
 		}
 
-		if (Input.GetButton ("Jump") && transform.position.y <= maximumHeight && PlayerStates.instance.energy >= 0) {
+		if (Input.GetButton ("Jump") && transform.position.y <= maximumHeight && p.energy >= 0 && p.currentState != PlayerStates.State.Falling) {
 			startFlying();
 			pos.y +=  ascentSpeed * Time.deltaTime;
-			p.currentState = PlayerStates.State.Flying;
 		}
 
-		if (Input.GetButton ("Decend") && PlayerStates.instance.currentState == PlayerStates.State.Flying) {
+		if (Input.GetButton ("Decend") && p.currentState == PlayerStates.State.Flying) {
 			pos.y -= ascentSpeed * Time.deltaTime;
 		}
 
-		if (distanceToGround () <= flightHeight && PlayerStates.instance.currentState == PlayerStates.State.Flying) {
+		if (distanceToGround () <= flightHeight && p.currentState == PlayerStates.State.Flying) {
 			startWalking();
 		}
 
-		if (PlayerStates.instance.currentState == PlayerStates.State.Flying) {
+		if (p.currentState == PlayerStates.State.Flying) {
 			flying ();
 		}
 
-		if (PlayerStates.instance.currentState == PlayerStates.State.Walking) {
+		if (p.currentState == PlayerStates.State.Falling) {
+			flying ();
+		}
+
+		if (p.currentState == PlayerStates.State.Walking) {
 			walking ();
 		}
 
-		if (PlayerStates.instance.currentState == PlayerStates.State.Swimming) {
+		if (p.currentState == PlayerStates.State.Swimming) {
 			swimming ();
 		}
 		
@@ -94,20 +97,30 @@ public class PlayerController : MonoBehaviour {
 		r.useGravity = false;
 		duckWings.SetActive(true);;
 		duckAnim.Play("Flying");
-		PlayerStates.instance.currentState = PlayerStates.State.Flying;
+		p.currentState = PlayerStates.State.Flying;
 	}
 
 	public void flying () {
 		if(distanceToGround() <= flightHeight) {
 			p.currentState = PlayerStates.State.Walking;
 		}
+		if (p.energy == 0) {
+			startFalling();
+		}
+	}
+
+	public void startFalling () {
+		duckWings.SetActive (false);
+		r.useGravity = true;
+		duckAnim.Play ("Walking");
+		p.setState(PlayerStates.State.Falling);
 	}
 
 	public void startWalking () {
 		duckWings.SetActive(false);
 		r.useGravity = true;
 		duckAnim.Play("Walking");
-		PlayerStates.instance.currentState = PlayerStates.State.Walking;
+		p.currentState = PlayerStates.State.Walking;
 	}
 
 	public void walking () {
@@ -118,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void startSwimming () {
-		PlayerStates.instance.currentState = PlayerStates.State.Swimming;
+		p.currentState = PlayerStates.State.Swimming;
 		duckWings.SetActive (false);
 		duckAnim.Play ("Walking");
 	}

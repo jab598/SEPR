@@ -654,6 +654,8 @@ MonoBehaviour:
   anim: {fileID: 9542432}
   health: 30
   pointsForKill: 10
+  damageToPlayer: 30
+  hitRate: 1
   missionProgressTag: killgeese
   wings: {fileID: 178298}
 --- !u!137 &13709056
@@ -783,6 +785,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: missionProgressTag
       value: killgeese
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damageToPlayer
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hitRate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

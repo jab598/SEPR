@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class MissionManager : MonoBehaviour {
 
 	public static MissionManager inst;
-	
 	public static MissionManager instance {
 		get {
 			if (inst == null) {
@@ -15,6 +14,8 @@ public class MissionManager : MonoBehaviour {
 			return inst;
 		}
 	}
+
+	public float gameplayLength = 5;
 
 	public List<Mission> missions = new List<Mission>();
 	public Dictionary<string, Mission> missionsDict = new Dictionary<string,Mission>();
@@ -25,6 +26,7 @@ public class MissionManager : MonoBehaviour {
 		foreach (Mission mission in missions) {
 			missionsDict[mission.missionTag] = mission;
 		}
+		gameplayLength *= 60;
 	}
 	
 	// Update is called once per frame

@@ -341,10 +341,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolSpeed: 1
   distanceToChasePlayer: 20
-  chasingPlayerMoveSpeed: 2
+  chasingPlayerMoveSpeed: 3
   anim: {fileID: 9533070}
   health: 20
   pointsForKill: 5
+  damageToPlayer: 5
+  hitRate: .5
   missionProgressTag: killrabbits
 --- !u!137 &13795580
 SkinnedMeshRenderer:
@@ -406,7 +408,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: chasingPlayerMoveSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: anim
@@ -423,6 +425,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: missionProgressTag
       value: killrabbits
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damageToPlayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hitRate
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -7,8 +7,8 @@ LightmapParameters:
   m_PrefabInternal: {fileID: 0}
   m_Name: TerrainLightmap
   serializedVersion: 3
-  resolution: 1
-  clusterResolution: .5
+  resolution: .100000001
+  clusterResolution: .100000001
   irradianceBudget: 128
   irradianceQuality: 8192
   backFaceTolerance: .899999976

@@ -121,7 +121,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	public void spawnCollectable () {
-		Instantiate(collectables[Random.Range (0,collectables.Count-1)], radiusAboutPlayer(collSpawnRadius,0.3f,50), Quaternion.identity);
+		Instantiate(collectables[Random.Range (0,collectables.Count)], radiusAboutPlayer(collSpawnRadius,0.3f,50), Quaternion.identity);
 		currentActiveCollectables++;
 	}
 	

@@ -22,9 +22,11 @@ public class GUIHandler : MonoBehaviour {
 	public Text pointsText;
 
 	/// <summary>
-	/// A prefab, the object instanced when points are gained. Must have <UpscrollingText> script on it.
+	/// A prefab, the object instanced when points or resources are gained. Must have <UpscrollingText> script on it.
 	/// </summary>
-	public GameObject pointsTextUpdateEffect;
+	public GameObject textUpdateEffect;
+
+	public Text resourceText;
 
 	/// <summary>
 	/// GUI Element, the energy bar text
@@ -37,9 +39,13 @@ public class GUIHandler : MonoBehaviour {
 	public Image energyBar;
 
 	/// <summary>
-	/// Max width of the energy bar
+	/// Max width of the energy bar and healath bar
 	/// </summary>
-	public int energyMaxWidth = 256;
+	public int barMaxWidth = 256;
+
+	public Text healthText;
+	public Image healthBar;
+
 
 	/// <summary>
 	/// A prefab, the mission text GUI element to be isntanced to build the mission text panel.
@@ -50,6 +56,8 @@ public class GUIHandler : MonoBehaviour {
 	/// The panel behind the mission texts, to be made parent of instanced texts.
 	/// </summary>
 	public GameObject missionPanel;
+
+	public Text timerText;
 
 	//Private var, list of mission texts for updating.
 	List<Text> missionTexts = new List<Text> ();
@@ -67,6 +75,10 @@ public class GUIHandler : MonoBehaviour {
 		updateMissions ();
 	}
 
+	void Update () {
+		updateTimer ();
+	}
+
 	/// <summary>
 	/// Updates the points text.
 	/// </summary>
@@ -78,13 +90,25 @@ public class GUIHandler : MonoBehaviour {
 		pointsText.text = "Points: " + newPoints;
 		//	instantiate the points update effect, and set its text to the update text
 		//	if its a mission, also change the movement vector to scroll right instead.
-		if (pointsTextUpdateEffect != null && !mission) {
-			GameObject p = (GameObject)Instantiate (pointsTextUpdateEffect, pointsText.transform.position, Quaternion.identity);
+		if (textUpdateEffect != null && !mission) {
+			GameObject p = (GameObject)Instantiate (textUpdateEffect, pointsText.transform.position, Quaternion.identity);
 			p.GetComponent<UpscrollingText> ().text = updateText;
-		} else if (pointsTextUpdateEffect != null && mission) {
-			GameObject p = (GameObject)Instantiate (pointsTextUpdateEffect, pointsText.transform.position, Quaternion.identity);
+		} else if (textUpdateEffect != null && mission) {
+			GameObject p = (GameObject)Instantiate (textUpdateEffect, pointsText.transform.position, Quaternion.identity);
 			p.GetComponent<UpscrollingText> ().text = updateText;
 			p.GetComponent<UpscrollingText>().movementVector = new Vector3(p.GetComponent<UpscrollingText>().movementVector.y,0,0);
+		}
+	}
+
+	public void updateResourceText(string newResources, string updateText, bool purchased = false) {
+		resourceText.text = "Resources: " + newResources;
+		if (purchased) {
+			GameObject p = (GameObject)Instantiate (textUpdateEffect, resourceText.transform.position, Quaternion.identity);
+			p.GetComponent<UpscrollingText>().text = updateText;
+			p.GetComponent<Text>().color = Color.red;
+		} else {
+			GameObject p = (GameObject)Instantiate (textUpdateEffect, resourceText.transform.position, Quaternion.identity);
+			p.GetComponent<UpscrollingText>().text = updateText;
 		}
 	}
 
@@ -128,8 +152,20 @@ public class GUIHandler : MonoBehaviour {
 		int clampVal = Mathf.Clamp (value, 0, 100);
 		energyText.text = "Energy: " + clampVal.ToString() + "%";
 		Vector3 newSize = energyBar.rectTransform.sizeDelta;
-		newSize.x = clampVal*energyMaxWidth/100;
+		newSize.x = clampVal*barMaxWidth/100;
 		energyBar.rectTransform.sizeDelta = newSize;
+	}
+
+	public void updateHealthBar(int value) {
+		int clampVal = Mathf.Clamp (value, 0, 100);
+		healthText.text = "Health: " + clampVal.ToString() + "%";
+		Vector3 newSize = healthBar.rectTransform.sizeDelta;
+		newSize.x = clampVal*barMaxWidth/100;
+		healthBar.rectTransform.sizeDelta = newSize;
+	}
+
+	public void updateTimer () {
+		timerText.text = Mathf.FloorToInt((MissionManager.instance.gameplayLength - Time.time)).ToString();
 	}
 	
 }
