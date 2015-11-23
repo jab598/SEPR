@@ -9,7 +9,7 @@ public class Mission : MonoBehaviour {
 
 	public string missionText;
 
-	public string tag;
+	public string missionTag;
 
 	public int progress;
 
@@ -18,9 +18,9 @@ public class Mission : MonoBehaviour {
 	public int pointsForComplete;
 
 	public void checkProgress () {
-		Debug.Log ("Checked");
-		if(progress >= completeProgress) {
+		if(progress >= completeProgress && complete == false) {
 			complete = true;
+			PlayerStates.instance.alterPoints(pointsForComplete, true);
 		}
 	}
 

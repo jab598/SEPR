@@ -3856,6 +3856,7 @@ MonoBehaviour:
   collectables:
   - {fileID: 133716, guid: 087290e45c12047319a7ee5d7709316f, type: 2}
   collSpawnRadius: 50
+  spawnRateIncrementValues: 
   maxCollectables: 30
   collectableSpawnHeight: .5
 --- !u!4 &1603136448
@@ -3900,7 +3901,7 @@ MonoBehaviour:
     type: 2}
   energyText: {fileID: 790431811}
   energyBar: {fileID: 1740591233}
-  maxEnergyWidth: 256
+  energyMaxWidth: 256
   missionTextPrefab: {fileID: 11494680, guid: a9f90fdf5bbe440c8b71687f88bd4262, type: 2}
   missionPanel: {fileID: 1394746525}
 --- !u!114 &1603136451
@@ -4198,14 +4199,6 @@ Prefab:
     - target: {fileID: 438568, guid: 2431e8657f79f4e77978bc3c8dcb2780, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11456718, guid: 2431e8657f79f4e77978bc3c8dcb2780, type: 2}
-      propertyPath: completeProgress
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 11456718, guid: 2431e8657f79f4e77978bc3c8dcb2780, type: 2}
-      propertyPath: pointsForComplete
-      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2431e8657f79f4e77978bc3c8dcb2780, type: 2}
@@ -5595,14 +5588,6 @@ Prefab:
     - target: {fileID: 446084, guid: 875bcb1c3bdae4833b71f71e39d12ba7, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11420756, guid: 875bcb1c3bdae4833b71f71e39d12ba7, type: 2}
-      propertyPath: completeProgress
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11420756, guid: 875bcb1c3bdae4833b71f71e39d12ba7, type: 2}
-      propertyPath: pointsForComplete
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 875bcb1c3bdae4833b71f71e39d12ba7, type: 2}

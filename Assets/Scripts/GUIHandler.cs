@@ -5,10 +5,8 @@ using System.Collections.Generic;
 
 public class GUIHandler : MonoBehaviour {
 
+	//singleton class. referene with GUIHandler.instance. ....
 	private static GUIHandler inst = null;
-	
-	// This defines a static instance property that attempts to find the manager object in the scene and
-	// returns it to the caller.
 	public static GUIHandler instance {
 		get {
 			if (inst == null) {
@@ -18,36 +16,68 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
-	
+	/// <summary>
+	/// GUI Element, the points text.
+	/// </summary>
 	public Text pointsText;
+
+	/// <summary>
+	/// A prefab, the object instanced when points are gained. Must have <UpscrollingText> script on it.
+	/// </summary>
 	public GameObject pointsTextUpdateEffect;
+
+	/// <summary>
+	/// GUI Element, the energy bar text
+	/// </summary>
 	public Text energyText;
+
+	/// <summary>
+	/// GUI Element, the actual energy bar panel
+	/// </summary>
 	public Image energyBar;
-	public int maxEnergyWidth;
+
+	/// <summary>
+	/// Max width of the energy bar
+	/// </summary>
+	public int energyMaxWidth = 256;
+
+	/// <summary>
+	/// A prefab, the mission text GUI element to be isntanced to build the mission text panel.
+	/// </summary>
 	public Text missionTextPrefab;
+
+	/// <summary>
+	/// The panel behind the mission texts, to be made parent of instanced texts.
+	/// </summary>
 	public GameObject missionPanel;
 
+	//Private var, list of mission texts for updating.
 	List<Text> missionTexts = new List<Text> ();
-	
-	private int missionTextsPositionOffset;
 
-	// Ensure that the instance is destroyed when the game is stopped in the editor.
+	//incremented inside the mission constructions and update loops. 
+	private int missionTextsPositionOffset;
+	
 	void OnApplicationQuit() {
 		inst = null;
 	}
 
 	void Start () {
-		buildMissionTexts (MissionManager.instance.missions.Count);
+		//builds the mission texts and updates them.
+		buildMissionTexts ();
 		updateMissions ();
 	}
 
-	void Update () {
-
-	}
-	
-	public void updatePointsText (string newText, string updateText, bool mission = false) {
-		Debug.Log (updateText);
-		pointsText.text = "Points: " + newText;
+	/// <summary>
+	/// Updates the points text.
+	/// </summary>
+	/// <param name="newPoints">Amount of points to display</param>
+	/// <param name="updateText">Text to show sliding up out of the gui.</param>
+	/// <param name="mission">If set to <c>true</c>, slides text left instead.</param>
+	public void updatePointsText (string newPoints, string updateText, bool mission = false) {
+		//update points text, and do different things based on the mission flag
+		pointsText.text = "Points: " + newPoints;
+		//	instantiate the points update effect, and set its text to the update text
+		//	if its a mission, also change the movement vector to scroll right instead.
 		if (pointsTextUpdateEffect != null && !mission) {
 			GameObject p = (GameObject)Instantiate (pointsTextUpdateEffect, pointsText.transform.position, Quaternion.identity);
 			p.GetComponent<UpscrollingText> ().text = updateText;
@@ -58,9 +88,15 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
-	void buildMissionTexts (int amount) {
+	/// <summary>
+	/// Builds the mission GUI
+	/// </summary>
+	void buildMissionTexts () {
+		//reset missiontexts flag, and start constructing the mission GUI
 		missionTextsPositionOffset = 0;
 		foreach(Mission m in MissionManager.instance.missionsDict.Values) {
+			//instantiate a text gui element, set the text to the mission text, set its parent to the mission panel,
+			//and then position it based on the flag. Add the mission to a list of current missions, and incriment the flag.
 			Text t = (Text)Instantiate (missionTextPrefab,Vector2.zero, Quaternion.identity);
 			t.gameObject.GetComponent<Text>().text = m.missionText + ": " + m.progress.ToString()+"/"+m.completeProgress.ToString();
 			t.gameObject.transform.SetParent(missionPanel.transform);
@@ -70,7 +106,11 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Updates the missions GUI panel with the current mission states.
+	/// </summary>
 	public void updateMissions () {
+		//set the pointer to zero, and then update each mission text.
 		missionTextsPositionOffset = 0;
 		foreach (Mission m in MissionManager.instance.missionsDict.Values) {
 			missionTexts[missionTextsPositionOffset].text = m.missionText + ": " + m.progress.ToString() + "/" + m.completeProgress.ToString();
@@ -78,11 +118,17 @@ public class GUIHandler : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Updates the energy bar.
+	/// </summary>
+	/// <param name="value">Value to set the energy bar to (0-100).</param>
 	public void updateEnergyBar (int value) {
+		//clamps energy between 0 and 100,
+		//then updates the text, and calculates the size of the bar.
 		int clampVal = Mathf.Clamp (value, 0, 100);
 		energyText.text = "Energy: " + clampVal.ToString() + "%";
 		Vector3 newSize = energyBar.rectTransform.sizeDelta;
-		newSize.x = clampVal*maxEnergyWidth/100;
+		newSize.x = clampVal*energyMaxWidth/100;
 		energyBar.rectTransform.sizeDelta = newSize;
 	}
 	

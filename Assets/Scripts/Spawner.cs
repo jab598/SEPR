@@ -29,6 +29,7 @@ public class Spawner : MonoBehaviour {
 	/// maximum amount of enemies possible to have spawned at once
 	/// </summary>
 	public float maxEnemies = 15;
+	float initialMaxEnemies;
 
 	/// <summary>
 	/// Possible spawn points of the enemies
@@ -47,6 +48,10 @@ public class Spawner : MonoBehaviour {
 
 	public List<GameObject> collectables = new List<GameObject>();
 	public float collSpawnRadius;
+
+	public List<int> spawnRateIncrementValues = new List<int>();
+	int currSpawnRate = 0;
+
 	float collScanHeight;
 	int currentActiveCollectables;
 	public int maxCollectables;
@@ -61,26 +66,21 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
+		initialMaxEnemies = maxEnemies;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		/*when debugging, draws lines between the active spawns and the player.
-		//only in scene view
-		if (debugMode) {
-			setLocalEnemySpawns();
-			foreach (Transform t in closeSpawnPoints) {
-				Debug.DrawLine (t.position, player.transform.position);
-			}
-		}*/
-
-		//ensures there is always maxEnemies in the scene.
+		//ensures there is always maxEnemies and collectables in the scene.
 		while (currentActiveEnemies < maxEnemies) {
 			spawnEnemy();
 		}
 		while (currentActiveCollectables < maxCollectables) {
 			spawnCollectable();
 		}
+
+		maxEnemies = initialMaxEnemies + (Mathf.FloorToInt (Time.time / 10));
+
 	}
 
 	/// <summary>
@@ -102,7 +102,7 @@ public class Spawner : MonoBehaviour {
 	/// <param name="distance">Max distance from player.</param>
 	/// <param name="height">Height above ground to place point.</param>
 	/// <param name="scanHeight">Height to start scanning down from for raytracing.</param>
-	Vector3 radiusAboutPlayer (float distance, float height, float scanHeight) {
+	public Vector3 radiusAboutPlayer (float distance, float height, float scanHeight) {
 		Vector3 tempSpawn = new Vector3(Random.Range (player.transform.position.x-distance,player.transform.position.x+distance),
 		                                scanHeight,
 		                                Random.Range (player.transform.position.z-distance,player.transform.position.z+distance)
@@ -123,6 +123,13 @@ public class Spawner : MonoBehaviour {
 	public void spawnCollectable () {
 		Instantiate(collectables[Random.Range (0,collectables.Count-1)], radiusAboutPlayer(collSpawnRadius,0.3f,50), Quaternion.identity);
 		currentActiveCollectables++;
+	}
+	
+	public void changeSpawnRates (int newMaxEnemies, int newSpawnRadius = 0) {
+		Spawner.instance.maxEnemies = newMaxEnemies;
+		if (newSpawnRadius != 0) {
+			Spawner.instance.enemySpawnRadius = newSpawnRadius;
+		}
 	}
 
 	/// <summary>

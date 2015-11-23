@@ -62,9 +62,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: +points
-  speed: 300
   lifetime: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
+  movementVector: {x: 0, y: 150, z: 0}
 --- !u!222 &22236084
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -94,7 +94,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: movementVector.y
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114386}

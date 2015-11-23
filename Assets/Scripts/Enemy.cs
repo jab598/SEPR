@@ -17,8 +17,9 @@ public class Enemy : AI {
 	void FixedUpdate () {
 		Move ();
 		if ((transform.position - player.transform.position).magnitude > maxDistanceFromPlayer) {
-			Spawner.instance.enemyKilled();
-			Destroy (this.gameObject);
+			Vector3 spawnPos = Spawner.instance.radiusAboutPlayer(Spawner.instance.enemySpawnRadius,1,50);
+			Instantiate(Spawner.instance.enemySpawnEffect, spawnPos, Quaternion.identity);
+			this.transform.position = spawnPos;
 		}
 	}
 	

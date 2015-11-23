@@ -42,10 +42,10 @@ MonoBehaviour:
   complete: 0
   missionName: Kill Geese
   missionText: Kill Geese
-  tag: killgeese
+  missionTag: killgeese
   progress: 0
-  completeProgress: 10
-  pointsForComplete: 100
+  completeProgress: 30
+  pointsForComplete: 150
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

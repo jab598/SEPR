@@ -42,10 +42,10 @@ MonoBehaviour:
   complete: 0
   missionName: Kill rabbits
   missionText: Kill Rabbits
-  tag: killrabbits
+  missionTag: killrabbits
   progress: 0
-  completeProgress: 5
-  pointsForComplete: 20
+  completeProgress: 3
+  pointsForComplete: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

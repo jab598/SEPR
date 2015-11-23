@@ -19,10 +19,11 @@ public class MissionManager : MonoBehaviour {
 	public List<Mission> missions = new List<Mission>();
 	public Dictionary<string, Mission> missionsDict = new Dictionary<string,Mission>();
 
+
 	// Use this for initialization
 	void Awake () {
 		foreach (Mission mission in missions) {
-			missionsDict[mission.tag] = mission;
+			missionsDict[mission.missionTag] = mission;
 		}
 	}
 	
@@ -45,4 +46,5 @@ public class MissionManager : MonoBehaviour {
 			GUIHandler.instance.updateMissions();
 		}
 	}
+
 }
