@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (p.currentState == PlayerStates.State.Falling) {
 			flying ();
+			pos.y -= 3*Time.deltaTime;
 		}
 
 		if (p.currentState == PlayerStates.State.Walking) {
@@ -102,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void flying () {
 		if(distanceToGround() <= flightHeight) {
-			p.currentState = PlayerStates.State.Walking;
+			startWalking();
 		}
 		if (p.energy == 0) {
 			startFalling();
@@ -110,9 +111,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void startFalling () {
-		duckWings.SetActive (false);
-		r.useGravity = true;
-		duckAnim.Play ("Walking");
+		//duckWings.SetActive (false);
+		//duckAnim.Play ("Walking");
 		p.setState(PlayerStates.State.Falling);
 	}
 

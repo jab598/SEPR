@@ -103,9 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eab6b903a74947acac40c856104bb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthOnCollect: 5
+  healthOnCollect: 10
   pointsEffect: {fileID: 147994, guid: 1076b104891bb4be8b89e345ece0a9a4, type: 2}
-  bob: 0
+  bob: 1
   bobAmount: .200000003
   bobSpeed: 1
 --- !u!1001 &100100000
@@ -133,7 +133,11 @@ Prefab:
       objectReference: {fileID: 147994, guid: 1076b104891bb4be8b89e345ece0a9a4, type: 2}
     - target: {fileID: 0}
       propertyPath: healthOnCollect
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bob
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

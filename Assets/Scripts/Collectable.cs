@@ -13,6 +13,8 @@ public class Collectable : MonoBehaviour {
 	/// </summary>
 	public int resourceOnCollect;
 
+	public int energyOnCollect;
+
 	/// <summary>
 	/// Gameobject that is instantiated when the player collides
 	/// </summary>
@@ -72,6 +74,8 @@ public class Collectable : MonoBehaviour {
 				PlayerStates.instance.alterResources(resourceOnCollect);
 				GUIHandler.instance.updateResourceText(PlayerStates.instance.resources.ToString(), "+"+resourceOnCollect.ToString());
 			}
+			PlayerStates.instance.alterEnergy(energyOnCollect);
+			GUIHandler.instance.updateEnergyBar(PlayerStates.instance.energy);
 			Spawner.instance.spawnCollectable();
 			Destroy(this.gameObject);
 		}
