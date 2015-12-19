@@ -26,6 +26,7 @@ ModelImporter:
     100036: Joint_4
     100038: Joint_4_2
     100040: wings
+    100042: Moncale
     400000: //RootNode
     400002: duck
     400004: Joint
@@ -47,8 +48,12 @@ ModelImporter:
     400036: Joint_4
     400038: Joint_4_2
     400040: wings
+    400042: Moncale
+    2300000: Moncale
+    3300000: Moncale
     4300000: wings
     4300002: duck
+    4300004: Moncale
     7400000: walking
     7400002: flying
     9500000: //RootNode

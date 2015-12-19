@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   complete: 0
-  missionName: Kill rabbits
+  missionDescription: Kill the rabbits with shooting with click!
   missionText: Kill Rabbits
   missionTag: killrabbits
   progress: 0
@@ -76,6 +76,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: progress
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionDescription
+      value: Kill the rabbits with shooting with click!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

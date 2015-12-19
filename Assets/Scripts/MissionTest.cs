@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class menuButtons : MonoBehaviour {
-
-
+public class MissionTest : Mission {
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +12,4 @@ public class menuButtons : MonoBehaviour {
 	void Update () {
 	
 	}
-
-	public void pressPlay () {
-		Application.LoadLevel (1);
-	}
-
 }

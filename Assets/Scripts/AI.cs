@@ -19,7 +19,7 @@ public class AI : MonoBehaviour {
 	/// <summary>
 	/// Speed at which the entity moves when chasing the player
 	/// </summary>
-	public int chasingPlayerMoveSpeed;
+	public float chasingPlayerMoveSpeed;
 
 	/// <summary>
 	/// The entitys animator. This should be attached to the same object as this script

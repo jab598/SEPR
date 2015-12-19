@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   complete: 0
-  missionName: Kill Geese
+  missionDescription: Kill the geese by shooting with click!
   missionText: Kill Geese
   missionTag: killgeese
   progress: 0
@@ -68,6 +68,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: progress
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionDescription
+      value: Kill the geese by shooting with click!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

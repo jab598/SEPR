@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 470486}
   - 114: {fileID: 11495156}
   - 65: {fileID: 6535874}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 446558}
   - 114: {fileID: 11466156}
   - 65: {fileID: 6543202}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Location (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - 4: {fileID: 443220}
   - 114: {fileID: 11487312}
   - 65: {fileID: 6503056}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Location (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - 4: {fileID: 499166}
   - 114: {fileID: 11451096}
   - 65: {fileID: 6561684}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Location (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - 4: {fileID: 486432}
   - 114: {fileID: 11433234}
   - 65: {fileID: 6585280}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Location (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - 4: {fileID: 411088}
   - 114: {fileID: 11435560}
   - 65: {fileID: 6510570}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Location (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - 4: {fileID: 447082}
   - 114: {fileID: 11474902}
   - 65: {fileID: 6585006}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Location (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183460}
   m_LocalRotation: {x: 0, y: -.152123407, z: 0, w: .988361537}
-  m_LocalPosition: {x: 61.2000008, y: -.342651367, z: -128.800003}
+  m_LocalPosition: {x: 61.2000008, y: 34.4000015, z: -128.800003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477378}
@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 134.5, y: -.342651367, z: 42.4000015}
+  m_LocalPosition: {x: 134.5, y: 34.4000015, z: 42.4000015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477378}
@@ -166,7 +166,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149344}
   m_LocalRotation: {x: 0, y: -.119183823, z: 0, w: .992872238}
-  m_LocalPosition: {x: -23.1000004, y: -.342651367, z: -150.699997}
+  m_LocalPosition: {x: -23.1000004, y: 34.4000015, z: -150.699997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477378}
@@ -178,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195564}
   m_LocalRotation: {x: 0, y: -.0314107649, z: 0, w: .999506593}
-  m_LocalPosition: {x: -102.599998, y: -.342651367, z: -163.199997}
+  m_LocalPosition: {x: -102.599998, y: 34.4000015, z: -163.199997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477378}
@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.2399101, y: -.342651367, z: 31.9997253}
+  m_LocalPosition: {x: 30.2399101, y: 34.4000015, z: 31.9997253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477378}
@@ -221,7 +221,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180866}
   m_LocalRotation: {x: 0, y: -.152123407, z: 0, w: .988361537}
-  m_LocalPosition: {x: 158.600006, y: -.342651367, z: -98.0999985}
+  m_LocalPosition: {x: 158.600006, y: 34.4000015, z: -98.0999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477378}
@@ -233,7 +233,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176788}
   m_LocalRotation: {x: 0, y: -.119183823, z: 0, w: .992872238}
-  m_LocalPosition: {x: -207.100006, y: -.342651367, z: -176}
+  m_LocalPosition: {x: -207.100006, y: 34.4000015, z: -176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477378}
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   complete: 0
-  missionName: Visit all locations
+  missionDescription: Visit the lake, computer science, and each college!
   missionText: Locations Visited
   missionTag: visitlocations
   progress: 0

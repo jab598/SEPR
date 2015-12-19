@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour {
 
+	//Handles singleton nature of the class
 	public static MissionManager inst;
 	public static MissionManager instance {
 		get {
@@ -15,14 +16,25 @@ public class MissionManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// The length of the gameplay in minutes;
+	/// </summary>
 	public float gameplayLength = 5;
 
+	/// <summary>
+	/// All active missions.
+	/// </summary>
 	public List<Mission> missions = new List<Mission>();
+
+	/// <summary>
+	/// Used for internal structure of the class.
+	/// </summary>
 	public Dictionary<string, Mission> missionsDict = new Dictionary<string,Mission>();
 
 
 	// Use this for initialization
 	void Awake () {
+		//build the mission dictionary
 		foreach (Mission mission in missions) {
 			missionsDict[mission.missionTag] = mission;
 		}
@@ -34,8 +46,16 @@ public class MissionManager : MonoBehaviour {
 	
 	}
 
+	/// <summary>
+	/// Progresses the specified mission.
+	/// </summary>
+	/// <param name="tag">Tag of the mission.</param>
+	/// <param name="amount">Amount to progress by.</param>
+	/// <param name="updateGUI">If set to <c>true</c> update GUI.</param>
 	public void addProgress(string tag, int amount, bool updateGUI = true) {
+		//update progress, ensure its between 0 and max progress
 		missionsDict [tag].progress = Mathf.Clamp (missionsDict[tag].progress + amount, 0, missionsDict [tag].completeProgress);
+		//check if mission has been completed
 		missionsDict [tag].checkProgress ();
 		if (updateGUI) {
 			GUIHandler.instance.updateMissions();

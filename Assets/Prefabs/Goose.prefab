@@ -649,8 +649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolSpeed: 2
-  distanceToChasePlayer: 10
-  chasingPlayerMoveSpeed: 2
+  distanceToChasePlayer: 15
+  chasingPlayerMoveSpeed: 2.5
   anim: {fileID: 9542432}
   health: 30
   pointsForKill: 10
@@ -776,11 +776,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: chasingPlayerMoveSpeed
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: distanceToChasePlayer
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: missionProgressTag

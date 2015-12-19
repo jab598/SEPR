@@ -13,6 +13,9 @@ public class Collectable : MonoBehaviour {
 	/// </summary>
 	public int resourceOnCollect;
 
+	/// <summary>
+	/// Energy gained on collection
+	/// </summary>
 	public int energyOnCollect;
 
 	/// <summary>
@@ -59,18 +62,22 @@ public class Collectable : MonoBehaviour {
 	}
 
 	void LateUpdate () {
+		//when out of range, spawn a new collectable
 		if((this.transform.position - player.transform.position).magnitude > 50) {
 			Spawner.instance.spawnCollectable();
 			Destroy (this.gameObject);
 		}
 	}
 
+	/// <summary>
+	/// When we collide with a player, update the relevent player stats and destroy itself.
+	/// </summary>
+	/// <param name="c">The thing we collided with</param>
 	void OnTriggerEnter (Collider c) {
 		if(c.transform.tag == "Player") {
 			PlayerStates.instance.alterPoints(pointsOnCollect);
 			GUIHandler.instance.updatePointsText(PlayerStates.instance.points.ToString(), "+"+pointsOnCollect.ToString());
 			if(resourceOnCollect != 0) {
-				Debug.Log ("Resources addded");
 				PlayerStates.instance.alterResources(resourceOnCollect);
 				GUIHandler.instance.updateResourceText(PlayerStates.instance.resources.ToString(), "+"+resourceOnCollect.ToString());
 			}
@@ -80,4 +87,7 @@ public class Collectable : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 	}
+
+
+
 }

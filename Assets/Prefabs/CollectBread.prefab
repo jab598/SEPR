@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 144.720001, y: 5.49599981, z: .230000004}
+  m_LocalPosition: {x: 183.935364, y: 1.02999997, z: 101.993408}
   m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,7 +73,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.34426165, y: 5.30000019, z: 2}
+  m_Size: {x: 8.40999985, y: 5.30000019, z: 5.73999977}
   m_Center: {x: -.29840827, y: 0, z: 0}
 --- !u!114 &11442860
 MonoBehaviour:
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsOnCollect: 10
-  resourceOnCollect: 3
+  resourceOnCollect: 5
   energyOnCollect: 5
   pointsEffect: {fileID: 114386, guid: c2a1bce35110e4b55a03ed54dc69db75, type: 2}
   bob: 1
@@ -122,7 +122,7 @@ Prefab:
       objectReference: {fileID: 114386, guid: c2a1bce35110e4b55a03ed54dc69db75, type: 2}
     - target: {fileID: 0}
       propertyPath: resourceOnCollect
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: energyOnCollect

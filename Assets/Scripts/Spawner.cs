@@ -29,6 +29,8 @@ public class Spawner : MonoBehaviour {
 	/// maximum amount of enemies possible to have spawned at once
 	/// </summary>
 	public float maxEnemies = 15;
+
+	//used to count up from for the gradual difficulty increase
 	float initialMaxEnemies;
 
 	/// <summary>
@@ -48,9 +50,6 @@ public class Spawner : MonoBehaviour {
 
 	public List<GameObject> collectables = new List<GameObject>();
 	public float collSpawnRadius;
-
-	public List<int> spawnRateIncrementValues = new List<int>();
-	int currSpawnRate = 0;
 
 	float collScanHeight;
 	int currentActiveCollectables;
@@ -79,6 +78,7 @@ public class Spawner : MonoBehaviour {
 			spawnCollectable();
 		}
 
+		//gradually increase the difficulty of the game at a rate of one enemy per ten seconds. +30 by the end of the game
 		maxEnemies = initialMaxEnemies + (Mathf.FloorToInt (Time.time / 10));
 
 	}
@@ -96,35 +96,47 @@ public class Spawner : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Point near the ground in a radius about the player the about player.
+	/// Point near the ground in a radius about the player.
 	/// </summary>
 	/// <returns>Random point thats near the player.</returns>
 	/// <param name="distance">Max distance from player.</param>
 	/// <param name="height">Height above ground to place point.</param>
 	/// <param name="scanHeight">Height to start scanning down from for raytracing.</param>
 	public Vector3 radiusAboutPlayer (float distance, float height, float scanHeight) {
+		//get a box above the player, height of scanHeight
 		Vector3 tempSpawn = new Vector3(Random.Range (player.transform.position.x-distance,player.transform.position.x+distance),
 		                                scanHeight,
 		                                Random.Range (player.transform.position.z-distance,player.transform.position.z+distance)
 		                                );
 		RaycastHit hit;
 		if (Physics.Raycast (tempSpawn, Vector3.down, out hit)) {
+			//dont spawn enemies on water
 			if(hit.transform.tag != "Water") {
 				tempSpawn = hit.point;
 				tempSpawn.y += height;
 				return tempSpawn;
 			} else {
+				//recurse if we hit water. 
 				return radiusAboutPlayer(distance,height,scanHeight);
 			}
 		}
+		//safety case
 		return player.transform.position;
 	}
 
+	/// <summary>
+	/// Spawns a random collectable.
+	/// </summary>
 	public void spawnCollectable () {
 		Instantiate(collectables[Random.Range (0,collectables.Count)], radiusAboutPlayer(collSpawnRadius,0.3f,50), Quaternion.identity);
 		currentActiveCollectables++;
 	}
-	
+
+	/// <summary>
+	/// Changes the spawn rates.
+	/// </summary>
+	/// <param name="newMaxEnemies">New max enemies.</param>
+	/// <param name="newSpawnRadius">New spawn radius.</param>
 	public void changeSpawnRates (int newMaxEnemies, int newSpawnRadius = 0) {
 		Spawner.instance.maxEnemies = newMaxEnemies;
 		if (newSpawnRadius != 0) {

@@ -5,7 +5,7 @@ public class Mission : MonoBehaviour {
 
 	public bool complete = false;
 
-	public string missionName;
+	public string missionDescription;
 
 	public string missionText;
 

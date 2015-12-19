@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -56,6 +56,8 @@ public class GUIHandler : MonoBehaviour {
 	/// The panel behind the mission texts, to be made parent of instanced texts.
 	/// </summary>
 	public GameObject missionPanel;
+
+	public GameObject pauseMissionPanel;
 
 	public Text timerText;
 
@@ -119,12 +121,21 @@ public class GUIHandler : MonoBehaviour {
 		//reset missiontexts flag, and start constructing the mission GUI
 		missionTextsPositionOffset = 0;
 		foreach(Mission m in MissionManager.instance.missionsDict.Values) {
+			//build mission top left GUI
 			//instantiate a text gui element, set the text to the mission text, set its parent to the mission panel,
 			//and then position it based on the flag. Add the mission to a list of current missions, and incriment the flag.
 			Text t = (Text)Instantiate (missionTextPrefab,Vector2.zero, Quaternion.identity);
 			t.gameObject.GetComponent<Text>().text = m.missionText + ": " + m.progress.ToString()+"/"+m.completeProgress.ToString();
 			t.gameObject.transform.SetParent(missionPanel.transform);
 			t.rectTransform.localPosition = new Vector2(-110, 100-20*(1+missionTextsPositionOffset));
+
+			//build pause menu
+			Text pauseText = (Text)Instantiate (missionTextPrefab,Vector2.zero, Quaternion.identity);
+			pauseText.gameObject.GetComponent<Text>().text = m.missionText + ": " + m.missionDescription;
+			pauseText.gameObject.transform.SetParent(pauseMissionPanel.transform);
+			pauseText.rectTransform.sizeDelta = new Vector2(500,30);
+			pauseText.rectTransform.localPosition = new Vector2(-245, 130-20*(1+missionTextsPositionOffset));
+
 			missionTexts.Add(t);
 			missionTextsPositionOffset++;
 		}
