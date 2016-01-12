@@ -25,11 +25,11 @@ public class PlayerShooting : MonoBehaviour {
 	public GameObject lasor;
 
 	//used to track if the player is shooting too fast.
-	float lastfireTime;
+	float lastfireTime = 0;
 
 	// Use this for initialization
 	void Start () {
-	
+		lasor.SetActive (false);
 	}
 	
 	// Update is called once per frame
