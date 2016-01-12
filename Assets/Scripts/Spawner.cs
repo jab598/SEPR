@@ -26,6 +26,11 @@ public class Spawner : MonoBehaviour {
 	public int enemySpawnRadius = 50;
 
 	/// <summary>
+	/// Time between enemy limit increasing by one.
+	/// </summary>
+	public float enemySpawnIncreaseRate = 10;
+
+	/// <summary>
 	/// maximum amount of enemies possible to have spawned at once
 	/// </summary>
 	public float maxEnemies = 15;
@@ -79,7 +84,7 @@ public class Spawner : MonoBehaviour {
 		}
 
 		//gradually increase the difficulty of the game at a rate of one enemy per ten seconds. +30 by the end of the game
-		maxEnemies = initialMaxEnemies + (Mathf.FloorToInt (Time.time / 10));
+		maxEnemies = initialMaxEnemies + (Mathf.FloorToInt (Time.time / enemySpawnIncreaseRate));
 
 	}
 
