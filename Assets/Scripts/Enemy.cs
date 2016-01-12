@@ -31,10 +31,12 @@ public class Enemy : AI {
 	void FixedUpdate () {
 		Move ();
 		//if enemy goes out of range, then position it somewhere in range and show the spawn effect
-		if ((transform.position - player.transform.position).magnitude > maxDistanceFromPlayer) {
-			Vector3 spawnPos = Spawner.instance.radiusAboutPlayer(Spawner.instance.enemySpawnRadius,1,50);
-			Instantiate(Spawner.instance.enemySpawnEffect, spawnPos, Quaternion.identity);
-			this.transform.position = spawnPos;
+		if (Spawner.instance != null) {
+			if ((transform.position - player.transform.position).magnitude > maxDistanceFromPlayer) {
+				Vector3 spawnPos = Spawner.instance.radiusAboutPlayer (Spawner.instance.enemySpawnRadius, 1, 50);
+				Instantiate (Spawner.instance.enemySpawnEffect, spawnPos, Quaternion.identity);
+				this.transform.position = spawnPos;
+			}
 		}
 	}
 	

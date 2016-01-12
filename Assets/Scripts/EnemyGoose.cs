@@ -17,7 +17,9 @@ public class EnemyGoose : Enemy {
 		if (wings != null) {
 			wings.SetActive (false);
 		}
-		maxDistanceFromPlayer = Spawner.instance.enemySpawnRadius;
+		if (Spawner.instance != null) {
+			maxDistanceFromPlayer = Spawner.instance.enemySpawnRadius;
+		}
 	}
 	
 	// Update is called once per frame
