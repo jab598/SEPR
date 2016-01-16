@@ -59,7 +59,6 @@ public class HealthPickup : MonoBehaviour {
 	void OnTriggerEnter (Collider c) {
 		if(c.transform.tag == "Player") {
 			PlayerStates.instance.alterHealth(healthOnCollect);
-			//GUIHandler.instance.updatePointsText(PlayerStates.instance.points.ToString(), "+"+healthOnCollect.ToString());
 			Spawner.instance.spawnCollectable();
 			Destroy(this.gameObject);
 		}

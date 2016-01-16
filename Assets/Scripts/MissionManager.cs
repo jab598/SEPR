@@ -33,7 +33,7 @@ public class MissionManager : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		//build the mission dictionary
 		foreach (Mission mission in missions) {
 			missionsDict[mission.missionTag] = mission;
