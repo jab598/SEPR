@@ -656,7 +656,9 @@ MonoBehaviour:
   pointsForKill: 10
   damageToPlayer: 30
   hitRate: 1
-  missionProgressTag: killgeese
+  missionProgressTags:
+  - killgeese
+  - killall
   wings: {fileID: 178298}
 --- !u!137 &13709056
 SkinnedMeshRenderer:
@@ -759,6 +761,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: missionProgressTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: health
       value: 30
       objectReference: {fileID: 0}
@@ -793,6 +799,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: hitRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionProgressTags.Array.data[0]
+      value: killgeese
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionProgressTags.Array.data[1]
+      value: killall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

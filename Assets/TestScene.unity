@@ -1621,7 +1621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a29b58dc87c549c99bba4b594cf7a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionTag: visitlocations
+  missionTag: []
 --- !u!1001 &1044310315
 Prefab:
   m_ObjectHideFlags: 0
@@ -2946,7 +2946,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 11456718, guid: 2431e8657f79f4e77978bc3c8dcb2780,
     type: 2}
   m_PrefabInternal: {fileID: 1683908254}
-  m_Script: {fileID: 11500000, guid: 7f57054f4b351473980f59feb3d211e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 22ebd65081f5a4474b5e77abd525adb7, type: 3}
 --- !u!1 &1877536929
 GameObject:
   m_ObjectHideFlags: 0

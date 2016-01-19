@@ -17,7 +17,7 @@ public class Enemy : AI {
 	/// <summary>
 	/// Mission that killing this enemy progresses' tag.
 	/// </summary>
-	public string missionProgressTag = "";
+	public string[] missionProgressTags;
 
 	//range to re-spawn the enemy.
 	protected int maxDistanceFromPlayer;
@@ -49,7 +49,7 @@ public class Enemy : AI {
 		if (health <= 0) {
 			PlayerStates.instance.alterPoints(pointsForKill);
 			Spawner.instance.enemyKilled ();
-			MissionManager.instance.addProgress(missionProgressTag, 1);
+			MissionManager.instance.addProgress(missionProgressTags, 1);
 			Destroy (this.gameObject);
 		}
 	}

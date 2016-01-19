@@ -52,11 +52,17 @@ public class MissionManager : MonoBehaviour {
 	/// <param name="tag">Tag of the mission.</param>
 	/// <param name="amount">Amount to progress by.</param>
 	/// <param name="updateGUI">If set to <c>true</c> update GUI.</param>
-	public void addProgress(string tag, int amount, bool updateGUI = true) {
+	public void addProgress(string[] tag, int amount, bool updateGUI = true) {
 		//update progress, ensure its between 0 and max progress
-		missionsDict [tag].progress = Mathf.Clamp (missionsDict[tag].progress + amount, 0, missionsDict [tag].completeProgress);
+		foreach (string s in tag) {
+			if(missionsDict.ContainsKey(s)) {
+				missionsDict [s].progress = Mathf.Clamp (missionsDict[s].progress + amount, 0, missionsDict [s].completeProgress);
+				missionsDict [s].checkProgress ();
+			}
+		}
+		//missionsDict [tag].progress = Mathf.Clamp (missionsDict[tag].progress + amount, 0, missionsDict [tag].completeProgress);
 		//check if mission has been completed
-		missionsDict [tag].checkProgress ();
+		//missionsDict [tag].checkProgress ();
 		if (updateGUI) {
 			GUIHandler.instance.updateMissions();
 		}

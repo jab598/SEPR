@@ -347,7 +347,9 @@ MonoBehaviour:
   pointsForKill: 5
   damageToPlayer: 5
   hitRate: .5
-  missionProgressTag: killrabbits
+  missionProgressTags:
+  - killrabbits
+  - killall
 --- !u!137 &13795580
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -399,6 +401,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: missionProgressTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: patrolSpeed
       value: 1
       objectReference: {fileID: 0}
@@ -433,6 +439,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: hitRate
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionProgressTags.Array.data[0]
+      value: killrabbits
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: missionProgressTags.Array.data[1]
+      value: killall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

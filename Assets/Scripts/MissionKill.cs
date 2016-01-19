@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MissionKillGeese : Mission {
-
-
+public class MissionKill : Mission {
 
 }

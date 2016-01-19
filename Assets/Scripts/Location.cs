@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Location : MonoBehaviour {
 
-	public string missionTag;
+	public string[] missionTag;
 	bool visited = false;
 
 	// Use this for initialization
