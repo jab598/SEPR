@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+/// <summary>
+/// Link to website: https://shelduck.wordpress.com/
+/// Link to executables: https://shelduck.wordpress.com/downloads/
+/// </summary>
+
 public class GUIHandler : MonoBehaviour {
 
 	//singleton class. referene with GUIHandler.instance. ....

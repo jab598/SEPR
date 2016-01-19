@@ -2,6 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Link to website: https://shelduck.wordpress.com/
+/// Link to executables: https://shelduck.wordpress.com/downloads/
+/// </summary>
+
 public class UpscrollingText : MonoBehaviour {
 
 	/// <summary>

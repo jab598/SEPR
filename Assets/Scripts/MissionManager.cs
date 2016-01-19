@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+/// <summary>
+/// Link to website: https://shelduck.wordpress.com/
+/// Link to executables: https://shelduck.wordpress.com/downloads/
+/// </summary>
+
 public class MissionManager : MonoBehaviour {
 
 	//Handles singleton nature of the class

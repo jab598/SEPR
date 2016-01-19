@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Link to website: https://shelduck.wordpress.com/
+/// Link to executables: https://shelduck.wordpress.com/downloads/
+/// </summary>
+
 public class menuButtons : MonoBehaviour {
-
-
-
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void pressPlay () {
 		Application.LoadLevel (1);
 	}
